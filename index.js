@@ -23,7 +23,7 @@ app.use(
       "http://localhost:3000",
       "https://api.cloudinary.com/v1_1/dh6tdcdyj/image/upload",
       "http://Reloading-env.eba-7nrbgs4x.ap-northeast-2.elasticbeanstalk.com",
-      "http://reloading.co.kr",
+      "https://reloading.co.kr",
     ],
     methods: ["GET", "POST"], // 사용할 메서드
     credentials: true, // 사용자와 클라이언트 서버간에 쿠키를 사용해서 통신을 할 것이기 떄문에.
