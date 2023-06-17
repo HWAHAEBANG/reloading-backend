@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 require("dotenv").config();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3060;
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -49,6 +49,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // 빌드 폴더 안에 있는 코드들을 서버에서 마음대로 꺼내가도 된다.
 // 서버가 허용되지 않은 파일을 가져가려고하면 굉장한 보안이슈가 있을 수 있기 때문에 이 같이 하는 것.
 // 서버를 켜놨다는 이유로 내 PC에 있는 모든 파일을 막 접속을 하거나 한다면 굉장히 위험하므로.
+
+// 이제 로컬에서 작업할 때만 사용
 // app.use(express.static("build"));
 
 // app.use(

@@ -168,11 +168,11 @@ const jobUpdateTransactionVolumeSalesAptSeoul = schedule.scheduleJob(
                         // 모든 데이터 추가 완료 후에 실행할 코드
                         if (insertCount === insertData.length) {
                           const message =
-                            "서울 아파트 매매 거래량 : 최근 몇개월 데이터의 변동 사항 반영 ( 변동 요인 => 취소거래 )";
+                            "서울 아파트 매매 거래량 : 최근 몇개월 데이터의 변동 사항 반영 ( 변동 요인 : 취소거래 )";
                           const notificationQuery = `INSERT INTO data_update_logs (message,update_type) VALUES (?,?);`;
                           db.query(
                             notificationQuery,
-                            [message, "modify"],
+                            [message, "refetch"],
                             (err, result) => {
                               if (err)
                                 return console.log(
