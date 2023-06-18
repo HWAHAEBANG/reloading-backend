@@ -4,6 +4,8 @@ const router = express.Router();
 const connectDB = require("../config/connectDB.js");
 const db = connectDB.init();
 // ===========================================================================================
+// ==================================================================
+// 서울 아파트 매매 거래량 데이터 가져오기 ==============================
 router.get("/", (req, res) => {
   try {
     const sqlQuery = `SELECT year, month, day, value FROM transaction_volume_sales_apt_seoul;`;

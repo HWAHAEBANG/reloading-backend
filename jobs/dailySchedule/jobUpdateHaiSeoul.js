@@ -33,23 +33,15 @@ const jobUpdateHaiSeoul = schedule.scheduleJob(updateRule, function () {
           `https://houstat.hf.go.kr/research/openapi/SttsApiTblData.do?STATBL_ID=T186503126543136&DTACYCLE_CD=QY&ITM_DATANO=10002&START_DTA_DT=200401&END_DTA_DT=203012&TYPE=json&pIndex=1&pSize=1000&key=${HAI_KEY}`
         )
         .then((response) => {
-          const filteredData = response.data.SttsApiTblData[1].row
-            // .filter((item) => item.gubunNm === "서울특별시")
-            .map((item) => ({
+          const filteredData = response.data.SttsApiTblData[1].row.map(
+            (item) => ({
               date: item.WRTTIME_IDTFR_ID,
               value: item.DTA_VAL,
-            }));
+            })
+          );
 
           // 그중에서 가장 최신 값 가져오기
           const latestDataApi = filteredData[filteredData.length - 1];
-
-          // console.log("디비", latestDataDb);
-          // console.log("디비 날짜", latestDataDb.date);
-          // console.log("디비 벨류", latestDataDb.value);
-
-          // console.log("에피아이", latestDataApi);
-          // console.log("에피아이 날짜", latestDataApi.date);
-          // console.log("에피아이 날짜", latestDataApi.value);
 
           // 날짜가 일치하면 값까지 같은지 확인한다음 같으면 통과, 다르면 update문 실행.
           // value까지 비교하는 이유는 몇몇 api에서 가장 최신 값의 변경되는 경우가 있기 때문.
@@ -87,7 +79,7 @@ const jobUpdateHaiSeoul = schedule.scheduleJob(updateRule, function () {
               );
             }
           } else {
-            // 날짜가 일치하지 않으면 새로운 데이터가 생선된 것이므로 insertans 실행
+            // 날짜가 일치하지 않으면 새로운 데이터가 생선된 것이므로 insert문 실행
             const year = latestDataApi.date.slice(0, 4);
             const month = latestDataApi.date.slice(5, 6) * 3 - 2;
             const day = 1;

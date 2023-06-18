@@ -4,6 +4,8 @@ const router = express.Router();
 const connectDB = require("../config/connectDB.js");
 const db = connectDB.init();
 // ===========================================================================================
+// ==================================================================
+// 수도권 미분양 물량 데이터 정보를 가져옴 =============================
 router.get("/", (req, res) => {
   try {
     const sqlQuery = `SELECT year, month, day, value FROM unsold_house_around_seoul;`;

@@ -39,16 +39,6 @@ const jobUpdateBaseRateKorea = schedule.scheduleJob(updateRule, function () {
           // 그중에서 가장 최신 값 가져오기
           const latestDataApi = filteredData[filteredData.length - 1];
 
-          // console.log("디비", latestDataDb);
-          // console.log("디비 날짜", latestDataDb.date);
-          // console.log("디비 벨류", latestDataDb.value);
-          // console.log("디비 벨류 타입", typeof latestDataDb.value);
-
-          // console.log("에피아이", latestDataApi);
-          // console.log("에피아이 날짜", latestDataApi.date);
-          // console.log("에피아이 벨류", latestDataApi.value);
-          // console.log("에피아이 벨류 타입", typeof latestDataApi.value);
-
           // 날짜가 일치하면 값까지 같은지 확인한다음 같으면 통과, 다르면 update문 실행.
           // value까지 비교하는 이유는 몇몇 api에서 가장 최신 값의 변경되는 경우가 있기 때문.
           if (latestDataApi.date === latestDataDb.date) {

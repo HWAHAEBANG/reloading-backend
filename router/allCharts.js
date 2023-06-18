@@ -6,23 +6,8 @@ const connectDB = require("../config/connectDB.js");
 const db = connectDB.init();
 connectDB.open(db);
 //=============================================
-
-// router.get("/", (req, res) => {
-//   res.sendFile(__dirname, "/build/index.html");
-//   // 해당하는 파일 경로를 정어운다,  __dirname는 루트경로를 의미/
-// });
-
-// id 데이터 무관하게 모든 차트 가져오는 코드 (CSS 테스트 용)
-// router.get("/", (req, res) => {
-//   const sqlQuery = `SELECT * FROM charts;`;
-//   db.query(sqlQuery, (err, result) => {
-//     if (err) throw err;
-//     console.log(result);
-//     res.send(result);
-//   });
-// });
-
-//============================================
+// ==================================================================
+// 모든 차트 정보를 받아옴 ============================================
 router.get("/", (req, res) => {
   const { userId } = req.query; // 클라이언트로부터 현재 로그인 중인 회원의 ID 받아옴
   const sqlQuery = `
@@ -37,10 +22,10 @@ router.get("/", (req, res) => {
     res.send(result);
   });
 });
-//==========================================
+// ==================================================================
+// 차트별 디테일 정보를 받아옴 (차트 데이터는 제외 )=====================
 router.get("/chartDetail", (req, res) => {
   const { urlPathName } = req.query; // 클라이언트로부터 현재 로그인 중인 회원의 ID 받아옴
-  console.log("잠만", urlPathName);
   const sqlQuery = `
     SELECT * FROM charts WHERE id = ?
   `;
@@ -50,8 +35,8 @@ router.get("/chartDetail", (req, res) => {
     res.send(result);
   });
 });
-
-//=========================================
+// ==================================================================
+//조회수, 디테일 들어갈때마다 카운트 업 ================================
 router.put("/viewCount", (req, res) => {
   const { chartId } = req.body.data;
   const sqlQuery = `UPDATE charts SET view_count = view_count + 1 WHERE id = ?;`;
@@ -61,5 +46,5 @@ router.put("/viewCount", (req, res) => {
     console.log(result);
   });
 });
-
+// ==================================================================
 module.exports = router;

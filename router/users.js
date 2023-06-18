@@ -449,68 +449,11 @@ router.post("/sendEmail", (req, res) => {
 
         // 비동기 설명 ======================
         // 위 코드에서 비동기 부분은 다음과 같은 부분들이 있습니다:
-
         // 데이터베이스 쿼리: db.query 함수를 사용하여 데이터베이스에 쿼리를 전송합니다. 이 함수는 비동기적으로 동작하며, 콜백 함수를 사용하여 쿼리 결과를 처리합니다. 여기서는 async (err, result) => { ... } 형태로 콜백 함수를 정의하여 에러와 결과를 처리합니다.
-
         // 이메일 전송 함수: sendEmail 함수는 nodemailer 라이브러리를 사용하여 이메일을 전송합니다. 이 함수는 async 키워드로 정의되어 있으며, 내부에서 await 키워드를 사용하여 이메일 전송이 완료될 때까지 기다립니다. 이렇게 함으로써 이메일 전송이 완료되기 전에 다음 동작이 실행되지 않도록 합니다.
-
         // 코드 실행: generateVerificationCodeAndSendEmail 함수는 await 키워드로 호출됩니다. 이 함수 내부에서는 비동기적으로 인증 코드를 생성하고 이메일을 전송합니다. await 키워드를 사용하여 sendEmail 함수가 완료될 때까지 기다립니다.
-
         // 따라서, 데이터베이스 쿼리와 이메일 전송은 비동기적으로 동작하며, 이를 처리하기 위해 콜백 함수와 async/await를 사용하여 순서를 제어하고 응답을 처리합니다. 이를 통해 코드의 실행 흐름을 유지하면서 비동기 작업이 완료될 때까지 기다릴 수 있습니다.
 
-        //==================================
-        //이하 나의 틀린 코드. 분석요망 =====================================================
-        // 이메일 전송 함수
-        // const sendEmail = async (recipientEmail, verificationCodes) => {
-        //   try {
-        //     const mailOptions = {
-        //       from: process.env.SMTP_USER,
-        //       to: recipientEmail,
-        //       subject: "RE:LOADING 이메일 인증 코드",
-        //       text: `
-        //   다음 인증코드를 사이트의 입력란이 입력해주세요.
-
-        //   인증 코드: ${verificationCodes[recipientEmail]}
-
-        //   본 인증 코드는 발급 기준 10분뒤 만기됩니다.
-        //   `,
-        //     };
-
-        //     const response = await transporter.sendMail(mailOptions);
-
-        //     console.log("이메일이 성공적으로 전송되었습니다.", response);
-        //     res.status(200).json("Send Complete");
-        //   } catch (error) {
-        //     console.error("이메일 전송 중 오류가 발생했습니다.", error);
-        //     res.status(500).json(error);
-        //   }
-        // };
-
-        // // 인증 코드 생성 및 이메일 전송
-        // const generateVerificationCodeAndSendEmail = async () => {
-        //   // 인증 코드 생성 로직
-        //   verificationCodes[recipientEmail] = Math.floor(
-        //     1000 + Math.random() * 9000
-        //   );
-        //   // setTimeout(() => {
-        //   //   // 10분 경과 후 다른 랜덤값으로 변환됨.
-        //   //   // verificationCodes[recipientEmail] = Math.floor(
-        //   //   //   1000 + Math.random() * 9000
-        //   //   // );
-        //   //   // 10분 경과 후 해당 키 삭제
-        //   //   delete verificationCodes[recipientEmail];
-        //   //   console.log("10분 경과", verificationCodes[recipientEmail]);
-        //   //   console.log("10분뒤 객체 전체보기", verificationCodes);
-        //   // }, 6000000);
-        // };
-
-        // // 실행
-        // await generateVerificationCodeAndSendEmail();
-        // console.log("인증번호", verificationCodes[recipientEmail]);
-        // console.log("객체 전체보기", verificationCodes);
-
-        // // 이메일 전송
-        // sendEmail(recipientEmail, verificationCodes[recipientEmail]);
         //========================================
       } else {
         res.status(400).json("Aready Used Email");
@@ -540,8 +483,8 @@ router.post(
     }
   }
 );
-
 //===========================================================================================
+// 아이디 찾기 이메일 발송 ====================================================================
 
 router.post("/sendFindIdEmail", (req, res) => {
   try {
@@ -614,6 +557,7 @@ router.post("/sendFindIdEmail", (req, res) => {
 });
 
 //=======================================================================================
+// 비밀번호 찾기 이메일 발송 ==============================================================
 router.post("/sendFindPwEmail", async (req, res) => {
   try {
     const recipientEmail = req.body.data.inputEmail;
@@ -701,8 +645,8 @@ router.post("/sendFindPwEmail", async (req, res) => {
     res.status(500).json(error);
   }
 });
-
-// 이메일 서비스 동의 ====================================================================
+// =====================================================================================
+// 이메일 서비스 요청 ====================================================================
 router.post("/emailServiceEnabled", (req, res) => {
   try {
     const presentId = req.body.data.presentId;
@@ -716,7 +660,7 @@ router.post("/emailServiceEnabled", (req, res) => {
   }
 });
 //=======================================================================================
-// 이메일 서비스 비동의 ====================================================================
+// 이메일 서비스 요청 취소 =================================================================
 router.post("/emailServiceDisabled", (req, res) => {
   try {
     const presentId = req.body.data.presentId;
@@ -748,8 +692,7 @@ router.get("/visitorCnt", (req, res) => {
   });
 });
 //=======================================================================================
-//===========================================================================================
-
+// 개발 제안 메일 전송 ====================================================================
 router.post("/sendSuggest", (req, res) => {
   try {
     // 이메일 전송

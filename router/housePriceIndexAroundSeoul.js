@@ -4,6 +4,8 @@ const router = express.Router();
 const connectDB = require("../config/connectDB.js");
 const db = connectDB.init();
 // ===========================================================================================
+// ==================================================================
+// 수도권 아파트 매매 지수 데이터를 받아옴 =============================
 router.get("/", (req, res) => {
   try {
     const sqlQuery = `SELECT year, month, day, value FROM house_price_index_apt_around_seoul;`;
@@ -22,5 +24,5 @@ router.get("/", (req, res) => {
     console.log(error);
   }
 });
-
+// ==================================================================
 module.exports = router;

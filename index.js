@@ -30,16 +30,6 @@ app.use(
 );
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// // CORS 설정
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "*"); // 모든 도메인 허용
-//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE"); // 허용할 HTTP 메서드
-//   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization"); // 허용할 헤더
-//   res.setHeader("Access-Control-Allow-Credentials", true); // 인증 정보 허용
-
-//   next();
-// });
-
 /**
  * body-parser 미들웨어는 HTTP 요청의 본문을 파싱하여 JSON 객체나 URL-encoded 문자열 등의 형태로 변환해주는 역할을 합니다. 이렇게 변환된 데이터는 req.body 객체에 저장되어 다른 라우팅 핸들러에서 사용될 수 있습니다.
  * extended: true 옵션은 내장된 QS(Query String) 모듈을 사용하여 URL-encoded 문자열을 해석할 때, 객체 안에 중첩된 객체 형태를 허용할지 여부를 설정합니다. true로 설정하면 중첩된 객체를 허용하며, false로 설정하면 중첩된 객체를 허용하지 않습니다.
@@ -68,7 +58,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //   // 해당하는 파일 경로를 적어준다,  __dirname는 루트경로를 의미/
 // });
 
-// page ===================================
+// page =========================================================================================================
 
 const ABOUT_US = require("./router/aboutUs.js");
 app.use("/api/aboutUs", authMiddleware, ABOUT_US);
@@ -88,7 +78,7 @@ app.use("/api/topicNews", authMiddleware, TOPIC_NEWS);
 const NOTIFICATION = require("./router/notification.js");
 app.use("/api/notification", authMiddleware, NOTIFICATION);
 
-// chart ==================================
+// chart ========================================================================================================
 const HAI = require("./router/hai.js");
 app.use("/api/allCharts/hai", HAI);
 
@@ -138,13 +128,13 @@ app.use(
   TRANSACTION_VOLUME_JEONSE_SEOUL
 );
 
-// ========================================
+// ==============================================================================================================
 
 app.listen(PORT, () => {
   console.log(`${PORT}번 포트가 열렸다..!`);
 });
 
-// schedule ================================
+// schedule ======================================================================================================
 executeScheduledUpdate();
 executeScheduledRefetch();
 executeScheduledSendEmail();

@@ -4,6 +4,8 @@ const router = express.Router();
 const connectDB = require("../config/connectDB.js");
 const db = connectDB.init();
 // ===========================================================================================
+// ==================================================================
+// 한국 기준금리 데이터 가져옴 ========================================
 router.get("/", (req, res) => {
   try {
     const sqlQuery = `SELECT year, month, day, value FROM base_rate_korea;`;
@@ -22,5 +24,5 @@ router.get("/", (req, res) => {
     console.log(error);
   }
 });
-
+// ==================================================================
 module.exports = router;

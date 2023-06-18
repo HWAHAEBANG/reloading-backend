@@ -6,6 +6,8 @@ const axios = require("axios");
 const NAVER_CLIENT_ID = process.env.NAVER_CLIENT_ID;
 const NAVER_CLIENT_SECRET = process.env.NAVER_CLIENT_SECRET;
 
+// ==================================================================
+// 클라이언트로 부터 파라미터를 전달받아 해당 검색어도 네이버 뉴스 데이터 받아옴 ==
 router.get("/", (req, res) => {
   const sort = req.query.selectedSort === "정확도순" ? "sim" : "date";
 
@@ -31,5 +33,6 @@ router.get("/", (req, res) => {
       res.status(500).send(error.message);
     });
 });
+// ==================================================================
 
 module.exports = router;

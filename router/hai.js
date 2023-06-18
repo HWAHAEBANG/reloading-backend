@@ -4,7 +4,8 @@ const router = express.Router();
 const connectDB = require("../config/connectDB.js");
 const db = connectDB.init();
 // ===========================================================================================
-
+// ==================================================================
+// 서울 HAI 데이터를 가져옴 ===========================================
 router.get("/", (req, res) => {
   try {
     const sqlQuery = `SELECT year, month, day, value FROM hai_seoul;`;
@@ -23,5 +24,5 @@ router.get("/", (req, res) => {
     console.log(error);
   }
 });
-
+// ==================================================================
 module.exports = router;
