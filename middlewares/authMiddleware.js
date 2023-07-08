@@ -53,7 +53,7 @@ const authMiddleware = (req, res, next) => {
         if (err) res.status(500).json(err);
         if (result.length === 0) {
           // 오류 발생구간!!!!!!!!
-          res.status(403).json("There Is No That Refresh Token in DB");
+          res.status(401).json("There Is No That Refresh Token in DB");
         } else {
           // DB 가져온 refresh token을 브라우저에서 가져온 refresh token과 비교
           const savedRefreshToken = result[0].refresh_token;
@@ -101,7 +101,7 @@ const authMiddleware = (req, res, next) => {
       });
       // 비정상적이거나 유효기만 만료된 refresh token인 경우 다음 코드 실행
     } catch (err) {
-      res.status(403).json("Invalid Refresh Token");
+      res.status(401).json("Invalid Refresh Token");
     }
     // refresh token 디코딩 시도
   }
