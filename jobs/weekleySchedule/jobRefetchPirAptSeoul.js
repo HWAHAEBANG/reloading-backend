@@ -14,7 +14,7 @@ const jobRefetchPirAptSeoul = schedule.scheduleJob(refetchRule, function () {
   try {
     axios
       .get(
-        "https://aptgin.com/pre/chart/region?loc=1100000000&target=rchart&type=p&ref=REGION01.MULTI_CHART%2CREGION01.REGION_LIST&locList=1100000000",
+        "https://aptgin.com/pre/chart/region?loc=1100000000&target=rchart&type=p&ref=REGION01.MULTI_CHART,REGION01.REGION_LIST&locList=1100000000&dataType=gin",
         {
           headers: {
             "X-Requested-With": "XMLHttpRequest",
