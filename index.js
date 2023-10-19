@@ -19,13 +19,12 @@ app.use(express.json()); // 왜필요? json 형식의 데이터를 통신하기 
 app.use(cookieParser());
 app.use(
   cors({
-    origin: '*',
-    // [
-    //   "http://localhost:3000",
-    //   "https://api.cloudinary.com/v1_1/dh6tdcdyj/image/upload",
-    //   "https://reloading.co.kr",
-    // ],
-    methods: ["GET", "POST"], // 사용할 메서드
+    origin: [
+      "http://localhost:3000",
+      "https://api.cloudinary.com/v1_1/dh6tdcdyj/image/upload",
+      "https://reloading.co.kr",
+    ],
+    methods: ["GET", "POST", "OPTIONS"], // 사용할 메서드
     credentials: true, // 사용자와 클라이언트 서버간에 쿠키를 사용해서 통신을 할 것이기 떄문에.
   })
 );
