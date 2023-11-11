@@ -139,7 +139,6 @@ app.listen(PORT, () => {
 });
 
 // schedule ======================================================================================================
-executeScheduledUpdate();
-executeScheduledRefetch();
-executeScheduledSendEmail();
-// test();
+// executeScheduledUpdate();
+// executeScheduledRefetch();
+// executeScheduledSendEmail();
