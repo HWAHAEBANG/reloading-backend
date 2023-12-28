@@ -9,9 +9,9 @@ const authMiddleware = require("./middlewares/authMiddleware.js");
 
 // const test = require("./jobs/dailySchedule/fetchAndSyncData.js");
 // const dailyDataResetScheduler = require("./jobs/dailyDataResetScheduler.js");
-const executeScheduledUpdate = require("./jobs/dailySchedule/fetchAndSyncData.js");
-const executeScheduledRefetch = require("./jobs/weekleySchedule/refetchAndSyncData.js");
-const executeScheduledSendEmail = require("./jobs/executeScheduledSendEmail.js");
+// const executeScheduledUpdate = require("./jobs/dailySchedule/fetchAndSyncData.js");
+// const executeScheduledRefetch = require("./jobs/weekleySchedule/refetchAndSyncData.js");
+// const executeScheduledSendEmail = require("./jobs/executeScheduledSendEmail.js");
 
 //==========================================
 
